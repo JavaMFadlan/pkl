@@ -20,19 +20,19 @@
                                         <div class=" mr-auto">
                                             <div class="form-group">
                                                 <label for="">positif</label>
-                                                <input type="text" name="positif" class="form-control" required value="{{$tracking->positif}}">
+                                                <input type="number" max="9999" name="positif" class="form-control" required value="{{$tracking->positif}}">
                                             </div>
                                         </div>
                                         <div class=" mr-auto">
                                             <div class="form-group">
                                                 <label for="">sembuh</label>
-                                                <input type="text" name="sembuh" class="form-control" required value="{{$tracking->sembuh}}">
+                                                <input type="number" max="9999" name="sembuh" class="form-control" required value="{{$tracking->sembuh}}">
                                             </div>
                                         </div>
                                         <div class=" mr-auto">
                                             <div class="form-group">
                                                 <label for="">meninggal</label>
-                                                <input type="text" name="meninggal" class="form-control" required value="{{$tracking->meninggal}}">
+                                                <input type="number" max="9999" name="meninggal" class="form-control" required value="{{$tracking->meninggal}}">
                                             </div>
                                         </div>
                                     </div>

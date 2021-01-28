@@ -9,26 +9,29 @@
                 <div class="card border-danger">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-5 mr-auto">
+                        <div class="col">
+                            @livewire('kasus', ['idt' => $tracking->id, 'idrw' => $tracking->id_rw, 'cek' => 1])
+                        </div>
+                        <div class="col">
+                            <div class=" mr-auto">
                                 <div class="form-group">
-                                    <label for="">kode rw</label>
-                                    <input type="number" name="kode" class="form-control" value="{{$rw->kode_rw}}" disabled>
+                                    <label for="">positif</label>
+                                    <input type="number" name="positif" class="form-control" disabled value="{{$tracking->positif}}">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class=" mr-auto">
                                 <div class="form-group">
-                                    <label for="">nama rw</label>
-                                    <input type="text" name="nama" class="form-control" value="{{$rw->nama_rw}}" disabled>
+                                    <label for="">sembuh</label>
+                                    <input type="number" name="sembuh" class="form-control" disabled value="{{$tracking->sembuh}}">
+                                </div>
+                            </div>
+                            <div class=" mr-auto">
+                                <div class="form-group">
+                                    <label for="">meninggal</label>
+                                    <input type="number" name="meninggal" class="form-control" disabled value="{{$tracking->meninggal}}">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-5 mx-auto">
-                                <div class="form-group">
-                                <label for="">nama kelurahan</label>
-                                        <input type="text" name="nama" class="form-control" value="{{$kelurahan->nama_kel}}" disabled>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <a role="button" class="btn btn-danger" href="{{ url()->previous() }}">Kembali</a>

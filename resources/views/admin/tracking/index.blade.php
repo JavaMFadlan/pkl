@@ -26,7 +26,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <a href="{{ route('tracking.create')}}" class="float-right btn btn-primary">
-                                Tambah Data
+                                <i class="fas fa-plus"></i>
                                 </a>
                             </div>
                             <div class="card-body">
@@ -35,10 +35,10 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama Rw</th>
-                                                <th>Positif</th>
-                                                <th>Sembuh</th>
-                                                <th>Meninggal</th>
+                                                <th>Alamat</th>
+                                                <th>Positif <i class="fas fa-frown"></i></th>
+                                                <th>Sembuh <i class="fas fa-smile-beam"></i></th>
+                                                <th>Meninggal <i class="fas fa-dizzy"></i></th>
                                                 <th>aksi</th>
                                             </tr>
                                         </thead>
@@ -49,7 +49,13 @@
                                             @foreach ($tracking as $data)
                                             <tr>
                                                 <td>{{$i++}}</td>
-                                                <td>{{$data->rw->nama_rw}}</td>
+                                                <td>
+                                                provinsi : {{$data->rw->kelurahan->kecamatan->kota->provinsi->nama_prov}}</br>
+                                                kota : {{$data->rw->kelurahan->kecamatan->kota->nama_kota}}</br>
+                                                kecamatan : {{$data->rw->kelurahan->kecamatan->nama_kec}}</br>
+                                                kelurahan :{{$data->rw->kelurahan->nama_kel}}</br>
+                                                Rw : {{$data->rw->nama_rw}}</br>
+                                                </td>
                                                 <td>{{$data->positif}}</td>
                                                 <td>{{$data->sembuh}}</td>
                                                 <td>{{$data->meninggal}}</td>
@@ -57,9 +63,9 @@
                                                     <form action="{{ route('tracking.destroy',$data->id)}}" method="post">
                                                         @method('delete')
                                                         @csrf
-                                                        <a href="{{route('tracking.show',$data->id)}}" role="button" class="btn btn-success"> Lihat </a>
-                                                        <a href="{{route('tracking.edit',$data->id)}}" role="button" class="btn btn-warning"> Edit </a>
-                                                        <input class="btn btn-danger" type="submit" value="Hapus">
+                                                        <a href="{{route('tracking.show',$data->id)}}" role="button" class="btn btn-success"> <i class="fas fa-eye"></i> </a>
+                                                        <a href="{{route('tracking.edit',$data->id)}}" role="button" class="btn btn-warning"> <i class="fas fa-edit"></i></a>
+                                                        <button class="btn btn-danger" type="submit" value="Hapus"><i class="fas fa-trash"></i>
                                                     </form>
                                                 </td>
                                             </tr>

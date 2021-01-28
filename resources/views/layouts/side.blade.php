@@ -21,6 +21,7 @@
                                     <a class="nav-link" href="{{ route('kecamatan.index')}}">Kecamatan</a>
                                     <a class="nav-link" href="{{ route('kelurahan.index')}}">Kelurahan</a>
                                     <a class="nav-link" href="{{ route('rw.index')}}">Rw</a>
+                                    <a class="nav-link" href="{{ route('tracking.index')}}">Tracking</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

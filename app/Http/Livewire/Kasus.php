@@ -20,7 +20,7 @@ class Kasus extends Component
 
     public $idT;
     public $idRw;
-
+    public $cek1 = NULL;
 
     public $pprovinsi = NULL;
     public $pkota = NULL;
@@ -28,7 +28,7 @@ class Kasus extends Component
     public $pkelurahan = NULL;
     public $prw = NULL;
 
-    public function mount($idt = NULL,$idrw = NULL)
+    public function mount($idt = NULL,$idrw = NULL, $cek = NULL)
     {
         $this->provinsi = provinsi::all();
         $this->kota = collect();
@@ -54,6 +54,9 @@ class Kasus extends Component
                 $this->pkecamatan = $rw->kelurahan->id_kec;
                 $this->pkelurahan = $rw->id_kel;
                 $this->prw = $rw->id;
+                if ($cek == 1) {
+                    $this->cek1 = $cek;
+                }
             }
         }
     }

@@ -29,7 +29,7 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <a href="{{ route('provinsi.create')}}" class="float-right btn btn-primary">
-                                Tambah Data
+                                <i class="fas fa-plus"></i>
                                 </a>
                             </div>
                             <div class="card-body">
@@ -56,9 +56,9 @@
                                                     <form action="{{ route('provinsi.destroy',$data->id)}}" method="post">
                                                         @method('delete')
                                                         @csrf
-                                                        <a href="{{route('provinsi.show',$data->id)}}" role="button" class="btn btn-success"> Lihat </a>
-                                                        <a href="{{route('provinsi.edit',$data->id)}}" role="button" class="btn btn-warning"> Edit </a>
-                                                        <input class="btn btn-danger" type="submit" value="Hapus">
+                                                        <a href="{{route('provinsi.show',$data->id)}}" role="button" class="btn btn-success"> <i class="fas fa-eye"></i> </a>
+                                                        <a href="{{route('provinsi.edit',$data->id)}}" role="button" class="btn btn-warning"> <i class="fas fa-edit"></i> </a>
+                                                        <button class="btn btn-danger" type="submit" value=""><i class="fas fa-trash"></i>
                                                     </form>
                                                 </td>
                                             </tr>

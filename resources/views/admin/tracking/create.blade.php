@@ -15,25 +15,27 @@
                                             @csrf
                                             <div class="row">
                                                 <div class="col">
-                                                    <livewire:kasus />
+                                                    <div class="form-group">
+                                                        @livewire('kasus')
+                                                    </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class=" mr-auto">
                                                         <div class="form-group">
                                                             <label for="">positif</label>
-                                                            <input type="text" name="positif" class="form-control" required id="">
+                                                            <input type="number" max="9999" name="positif" class="form-control" required id="">
                                                         </div>
                                                     </div>
                                                     <div class=" mr-auto">
                                                         <div class="form-group">
                                                             <label for="">sembuh</label>
-                                                            <input type="text" name="sembuh" class="form-control" required id="">
+                                                            <input type="number" max="9999" name="sembuh" class="form-control" required id="">
                                                         </div>
                                                     </div>
                                                     <div class=" mr-auto">
                                                         <div class="form-group">
                                                             <label for="">meninggal</label>
-                                                            <input type="text" name="meninggal" class="form-control" required id="">
+                                                            <input type="number" max="9999" name="meninggal" class="form-control" required id="">
                                                         </div>
                                                     </div>
                                                 </div>

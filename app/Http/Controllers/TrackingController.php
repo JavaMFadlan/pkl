@@ -42,6 +42,8 @@ class TrackingController extends Controller
         $tracking->positif = $request->positif;
         $tracking->meninggal = $request->meninggal;
         $tracking->save();
+        return redirect()->route('tracking.index')->with(['message' => 'Berhasil']);
+
     }
 
     /**
@@ -50,7 +52,7 @@ class TrackingController extends Controller
      * @param  \App\tracking  $tracking
      * @return \Illuminate\Http\Response
      */
-    public function show(tracking $tracking)
+    public function show($id)
     {
         $tracking = tracking::findorFail($id);
         return view('admin.tracking.show',compact('tracking'));
@@ -75,9 +77,15 @@ class TrackingController extends Controller
      * @param  \App\tracking  $tracking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, tracking $tracking)
+    public function update(Request $request, $id)
     {
-        //
+        $tracking = tracking::findorFail($id);
+        $tracking->id_rw = $request->id_rw;
+        $tracking->sembuh = $request->sembuh;
+        $tracking->positif = $request->positif;
+        $tracking->meninggal = $request->meninggal;
+        $tracking->update();
+        return redirect()->route('tracking.index')->with(['message' => 'Berhasil']);
     }
 
     /**
@@ -86,8 +94,9 @@ class TrackingController extends Controller
      * @param  \App\tracking  $tracking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tracking $tracking)
+    public function destroy($id)
     {
-        //
+        $tracking = tracking::findorfail($id)->delete();
+        return redirect()->route('tracking.index')->with(['message1' => 'Data Berhasil Dihapus']);
     }
 }
