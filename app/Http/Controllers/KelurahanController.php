@@ -26,6 +26,7 @@ class KelurahanController extends Controller
      */
     public function create()
     {
+        
         $kecamatan = kecamatan::all();
         return view('admin.kelurahan.create',compact('kecamatan'));
     }
@@ -38,6 +39,18 @@ class KelurahanController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode kelurahan Harus Angka',
+            'unique' => 'kode kelurahan telah terpakai',
+        ];  
+        $this->validate($request, [
+                    'id_kec' => 'required',
+                    'nama' => 'required|min:5',
+                    'kode' => "required|numeric|unique:kelurahans,kode_kel",
+        ], $messages
+        );
         $kelurahan = new kelurahan();
         $kelurahan->id_kec = $request->id_kec;
         $kelurahan->nama_kel = $request->nama;
@@ -81,6 +94,18 @@ class KelurahanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode kelurahan Harus Angka',
+            'unique' => 'kode kelurahan telah terpakai',
+        ];  
+        $this->validate($request, [
+                    'id_kec' => 'required',
+                    'nama' => 'required|min:5',
+                    'kode' => "required|numeric|unique:kelurahans,kode_kel",
+        ], $messages
+        );
         $kelurahan = kelurahan::findorfail($id);
         $kelurahan->id_kec = $request->id_kec;
         $kelurahan->kode_kel = $request->kode;

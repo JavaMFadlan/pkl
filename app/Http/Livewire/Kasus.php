@@ -36,10 +36,6 @@ class Kasus extends Component
         $this->kelurahan = collect();
         $this->rw = collect();
 
-        if(!is_null($idt)){
-            $tracking = tracking::findorfail($idt);
-            
-        }
         if (!is_null($idrw)) {
             $rw = rw::with('kelurahan.kecamatan.kota.provinsi')->find($idrw);
         

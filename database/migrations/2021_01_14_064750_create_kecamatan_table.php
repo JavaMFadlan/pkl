@@ -14,10 +14,10 @@ class CreateKecamatanTable extends Migration
     public function up()
     {
         Schema::create('kecamatans', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->char('id',7)->primary();
+            $table->integer('kode_kec');
             $table->foreignId('id_kota')->constrained('kotas')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nama_kec');
-            $table->integer('kode_kec');
             $table->timestamps();
         });
     }

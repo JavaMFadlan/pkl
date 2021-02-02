@@ -36,11 +36,22 @@ class TrackingController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+        ];  
+        $this->validate($request, [
+                    'id_rw' => 'required',
+                    'sembuh' => "required",
+                    'positif' => "required",
+                    'meninggal' => "required"
+        ], $messages
+        );
         $tracking = new tracking();
         $tracking->id_rw = $request->id_rw;
         $tracking->sembuh = $request->sembuh;
         $tracking->positif = $request->positif;
         $tracking->meninggal = $request->meninggal;
+        $tracking->tanggal = date('Y-m-d');
         $tracking->save();
         return redirect()->route('tracking.index')->with(['message' => 'Berhasil']);
 
@@ -79,6 +90,16 @@ class TrackingController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+        ];  
+        $this->validate($request, [
+                    'id_rw' => 'required',
+                    'sembuh' => "required",
+                    'positif' => "required",
+                    'meninggal' => "required"
+        ], $messages
+        );
         $tracking = tracking::findorFail($id);
         $tracking->id_rw = $request->id_rw;
         $tracking->sembuh = $request->sembuh;

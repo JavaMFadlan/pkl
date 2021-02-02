@@ -6,6 +6,7 @@ use App\kota;
 use App\provinsi;
 use Illuminate\Http\Request;
 
+
 class KotaController extends Controller
 {
     /**
@@ -13,6 +14,7 @@ class KotaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $success = 200;
     public function index()
     {
         $kota = kota::with('provinsi')->get();
@@ -38,6 +40,18 @@ class KotaController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode kota Harus Angka',
+            'unique' => 'kode kota telah terpakai',
+        ];  
+        $this->validate($request, [
+                    'id_prov' => 'required',
+                    'nama' => 'required|min:5',
+                    'kode' => 'required|numeric|unique:kotas,kode_kota',
+        ], $messages
+        );
         $kota = new kota();
         $kota->id_prov = $request->id_prov;
         $kota->nama_kota = $request->nama;
@@ -81,6 +95,17 @@ class KotaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode kota Harus Angka',
+            'unique' => 'kode kota telah terpakai'
+        ];
+        $this->validate($request, [
+            'id_prov' => 'required',
+            'nama' => 'required|min:5',
+            'kode' => "required|numeric|unique:kotas,kode_kota,$id",
+        ], $messages);
         $kota = kota::findorfail($id);
         $kota->id_prov = $request->id_prov;
         $kota->kode_kota = $request->kode;
@@ -99,5 +124,11 @@ class KotaController extends Controller
     {
         $kota = kota::findorfail($id)->delete();
         return redirect()->route('kota.index')->with(['message1' => 'Data Berhasil Dihapus']);
+    }
+
+    public function Apikota()
+    {
+        $kota = kota::all();
+        return response()->json(['status' => 200 , 'data' => $kota], $this->success);
     }
 }

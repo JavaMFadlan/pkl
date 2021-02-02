@@ -4,7 +4,7 @@
             <select name="provinsi" wire:model="pprovinsi" class="border shadow p-2 bg-white form-control" <?= (!is_null($cek1))? 'disabled' : '';?>>
                 <option value='' >pilih provinsi</option>
                 @foreach($provinsi as $data)
-                    <option value={{ $data->id }}>{{ $data->nama_prov }}</option>
+                    <option value="{{ $data->id }}">{{ $data->nama_prov }}</option>
                 @endforeach
             </select>
         </div>
@@ -14,9 +14,9 @@
                 <select name="kota" wire:model="pkota" 
                     class="p-2 px-4 py-2 pr-8 leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline form-control"
                     <?= (!is_null($cek1))? 'disabled' : '';?>>
-                    <option value='' >pilih kota</option>
+                    <option >pilih kota</option>
                     @foreach($kota as $item)
-                        <option value={{ $item->id }} <?= (!is_null($pprovinsi) && $item->id_prov == $pprovinsi)? 'selected' : '';?>>{{ $item->nama_kota }}</option>
+                        <option value="{{ $item->id }}" <?= (!is_null($pprovinsi) && $item->id_prov == $pprovinsi)? 'selected' : '';?>>{{ $item->nama_kota }}</option>
                     @endforeach
                 </select>
             </div>
@@ -29,7 +29,7 @@
                     <?= (!is_null($cek1))? 'disabled' : '';?>>
                     <option value=''>pilih kecamatan</option>
                     @foreach($kecamatan as $kec)
-                        <option value={{ $kec->id }} <?= (!is_null($pkota) && $kec->id_kota == $pkota)? 'selected' : '';?>>{{ $kec->nama_kec }}</option>
+                        <option value="{{ $kec->id }}"<?= (!is_null($pkota) && $kec->id_kota == $pkota)? 'selected' : '';?>>{{ $kec->nama_kec }}</option>
                     @endforeach
                 </select>
             </div>
@@ -43,7 +43,7 @@
                     <?= (!is_null($cek1))? 'disabled' : '';?>>
                     <option value=''>pilih kelurahan</option>
                     @foreach($kelurahan as $kel)
-                        <option value={{ $kel->id }} <?= (!is_null($pkecamatan) && $kel->id_kec == $pkecamatan)? 'selected' : '';?>>{{ $kel->nama_kel }}</option>
+                        <option value="{{ $kel->id }}"<?= (!is_null($pkecamatan) && $kel->id_kec == $pkecamatan)? 'selected' : '';?>>{{ $kel->nama_kel }}</option>
                     @endforeach
                 </select>
             </div>
@@ -57,7 +57,7 @@
                     <?= (!is_null($cek1))? 'disabled' : '';?>>
                     <option value=''>pilih rw</option>
                     @foreach($rw as $r)
-                        <option value={{ $r->id }} <?= (!is_null($pkelurahan) && $r->id_kel == $pkelurahan)? 'selected' : '';?>>{{ $r->nama_rw }}</option>
+                        <option value="{{ $r->id }}" <?= (!is_null($pkelurahan) && $r->id_kel == $pkelurahan)? 'selected' : '';?>>{{ $r->nama_rw }}</option>
                     @endforeach
                 </select>
             </div>

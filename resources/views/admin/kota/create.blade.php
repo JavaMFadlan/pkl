@@ -10,6 +10,15 @@
                                     <div class="card-header text-center">
                                         <h3>Menambah Data kota</h3>
                                     </div>
+                                    @if (count($errors) > 0)
+                                        <div class="alert alert-danger">
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        @endif
                                     <div class="card-body">
                                         <form action="{{route('kota.store')}}" method="post">
                                             @csrf

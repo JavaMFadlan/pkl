@@ -38,6 +38,18 @@ class KecamatanController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode kecamatan Harus Angka',
+            'unique' => 'kode kecamatan telah terpakai',
+        ];  
+        $this->validate($request, [
+                    'id_kota' => 'required',
+                    'nama' => 'required|min:5',
+                    'kode' => 'required|numeric|unique:kecamatans,kode_kec',
+        ], $messages
+        );
         $kecamatan = new kecamatan();
         $kecamatan->id_kota = $request->id_kota;
         $kecamatan->nama_kec = $request->nama;
@@ -81,6 +93,18 @@ class KecamatanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode kecamatan Harus Angka',
+            'unique' => 'kode kecamatan telah terpakai',
+        ];  
+        $this->validate($request, [
+                    'id_kota' => 'required',
+                    'nama' => 'required|min:5',
+                    'kode' => "required|numeric|unique:kecamatans,kode_kec,$id",
+        ], $messages
+        );
         $kecamatan = kecamatan::findorfail($id);
         $kecamatan->id_kota = $request->id_kota;
         $kecamatan->kode_kec = $request->kode;

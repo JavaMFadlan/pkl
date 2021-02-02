@@ -11,7 +11,7 @@
                                         <h3>Menambah Data rw</h3>
                                     </div>
                                     <div class="card-body">
-                                        <form action="{{route('tracking.store')}}" method="post" enctype="multipart/formdata">
+                                        <form action="{{route('tracking.store')}}" method="post">
                                             @csrf
                                             <div class="row">
                                                 <div class="col">

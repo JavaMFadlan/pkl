@@ -12,6 +12,7 @@ class ProvinsiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public $success = 200;
     public function index()
     {
         $provinsi = provinsi::all();
@@ -36,6 +37,16 @@ class ProvinsiController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => ':attribute Harus Angka',
+            'unique' => ':attribute telah terpakai'
+        ];
+        $this->validate($request, [
+                    'nama' => 'required|min:5',
+                    'kode' => 'required|numeric|unique:provinsis,kode_prov',
+        ],$messages);
         $provinsi = new provinsi();
         $provinsi->kode_prov = $request->kode;
         $provinsi->nama_prov = $request->nama;
@@ -76,6 +87,16 @@ class ProvinsiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => ':attribute Harus Angka',
+            'unique' => ':attribute telah terpakai'
+        ];
+        $this->validate($request, [
+                    'nama' => 'required|min:5',
+                    'kode' => "required|numeric|unique:provinsi,kode_prov,$id",
+        ],$messages);
         $provinsi = provinsi::findorfail($id);
         $provinsi->kode_prov = $request->kode;
         $provinsi->nama_prov = $request->nama;
@@ -93,5 +114,11 @@ class ProvinsiController extends Controller
     {
         $provinsi = provinsi::findorfail($id)->delete();
         return redirect()->route('provinsi.index')->with(['message1' => 'Data Berhasil Dihapus']);
+    }
+
+    public function Apiprov()
+    {
+        // $provinsi = provinsi::all();
+        // return response()->json(['status' => 200 , 'data' => $provinsi], $this->success);
     }
 }

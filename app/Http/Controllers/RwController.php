@@ -38,6 +38,18 @@ class RwController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode Rw Harus Angka',
+            'unique' => 'kode Rw telah terpakai',
+        ];  
+        $this->validate($request, [
+                    'id_kel' => 'required',
+                    'nama' => 'required|min:3',
+                    'kode' => "required|numeric|unique:rws,kode_rw",
+        ], $messages
+        );
         $rw = new rw();
         $rw->id_kel = $request->id_kel;
         $rw->nama_rw = $request->nama;
@@ -81,6 +93,18 @@ class RwController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $messages = [
+            'required' => ':attribute wajib diisi',
+            'min' => ':attribute harus diisi minimal :min karakter ',
+            'numeric' => 'kode Rw Harus Angka',
+            'unique' => 'kode Rw telah terpakai',
+        ];  
+        $this->validate($request, [
+                    'id_kel' => 'required',
+                    'nama' => 'required|min:5',
+                    'kode' => "required|numeric|unique:rws,kode_rw,$id",
+        ], $messages
+        );
         $rw = rw::findorfail($id);
         $rw->id_kel = $request->id_kel;
         $rw->kode_rw = $request->kode;
