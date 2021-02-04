@@ -8,20 +8,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/provinsi', 'API\APIProvinsiController@index');
-Route::get('/provinsi/{id}', 'API\APIProvinsiController@show');
+Route::get('/provinsi', 'API\APIController@provinsi');
+Route::get('/provinsi/{id}', 'API\APIController@provinsi_show');
 
-Route::get('/rw', 'API\APIRwController@index');
-Route::get('/rw/{id}', 'API\APIRwController@show');
+Route::get('/kota', 'API\APIController@kota');
+Route::get('/kota/{id}', 'API\APIController@kota_show');
 
-Route::get('/kelurahan', 'API\APIKelurahanController@index');
-Route::get('/kelurahan/{id}', 'API\APIKelurahanController@show');
+Route::get('/kecamatan', 'API\APIController@kecamatan');
+Route::get('/kecamatan/{id}', 'API\APIController@kecamatan_show');
 
-Route::get('/kecamatan', 'API\APIKecamatanController@index');
-Route::get('/kecamatan/{id}', 'API\APIKecamatanController@show');
-// Route::post('/provinsi/store', 'API\APIProvinsiController@store');
-// Route::get('/provinsi/{id}', 'API\APIProvinsiController@show');
-// Route::put('/provinsi/update/{id?}','API\APIProvinsiController@update');
-// Route::delete('/provinsi/{id?}', 'API\APIprovinsiController@destroy');
+Route::get('/kelurahan', 'API\APIController@kelurahan');
+Route::get('/kelurahan/{id}', 'API\APIController@kelurahan_show');
+
+Route::get('/rw', 'API\APIController@rw');
+Route::get('/rw/{id}', 'API\APIController@rw_show');
+
 
 
