@@ -25,3 +25,15 @@ Route::get('/rw/{id}', 'API\APIController@rw_show');
 
 
 
+//Kasus
+Route::get('/positif', 'API\APIKasusController@positif');
+Route::get('/sembuh', 'API\APIKasusController@sembuh');
+Route::get('/meninggal', 'API\APIKasusController@meninggal');
+
+
+//Negara
+Route::get('/indonesia', 'API\APIKasusController@indonesia');
+Route::get('/dunia', 'API\APIKasusController@dunia');
+
+
+

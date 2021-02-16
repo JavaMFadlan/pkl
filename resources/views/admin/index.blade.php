@@ -5,6 +5,7 @@
                     <div class="container-fluid">
                         <div class="mt-4"></div>
                         <div class="row">
+                        
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">Primary Card</div>
@@ -43,86 +44,42 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area mr-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                <div class="col">
+                                    <div id="barChart" width="100%" height="40"></div>
                                 </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar mr-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                <div class="col">
+                                    <div id="chartContainer" width="100%" height="40"></div>
                                 </div>
-                            </div>
                         </div>
                         <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table mr-1"></i>
-                                DataTable Example
+                            <div class="card-header text-center">
+                                <h3>Global</h3>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
+                                                <th>No</th>
+                                                <th>Negara</th>
+                                                <th>Kasus</th>
+                                                <th>Aktif</th>
+                                                <th>Sembuh</th>
+                                                <th>Meninggal</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
+                                        @php $no = 1 @endphp
+                                            @foreach ($data as $item)
                                             <tr>
-                                                <td>Tiger Nixon</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
-                                                <td>$320,800</td>
+                                                <td>{{$no++}}</td>
+                                                <td>{{$item['nama_negara']}}</td>
+                                                <td>{{$item['kasus']}}</td>
+                                                <td>{{$item['aktif']}}</td>
+                                                <td>{{$item['sembuh']}}</td>
+                                                <td>{{$item['meninggal']}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>Garrett Winters</td>
-                                                <td>Accountant</td>
-                                                <td>Tokyo</td>
-                                                <td>63</td>
-                                                <td>2011/07/25</td>
-                                                <td>$170,750</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Ashton Cox</td>
-                                                <td>Junior Technical Author</td>
-                                                <td>San Francisco</td>
-                                                <td>66</td>
-                                                <td>2009/01/12</td>
-                                                <td>$86,000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Cedric Kelly</td>
-                                                <td>Senior Javascript Developer</td>
-                                                <td>Edinburgh</td>
-                                                <td>22</td>
-                                                <td>2012/03/29</td>
-                                                <td>$433,060</td>
-                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -145,3 +102,79 @@
             </div>
         </div>
 @endsection
+        <script>
+                <?php 
+                $f = 0;
+                $g = 0;
+                $h = 0;
+                $k = 0;
+                foreach ($data as $key) {
+                        $g += $key['aktif'];
+                        $h += $key['meninggal'];
+                        $k += $key['sembuh'];
+                    }
+                $f = $g + $h + $k;
+                $n = ($g / $f) * 100;
+                $m = ($h / $f) * 100;
+                $b = ($k / $f) * 100;
+                ?>
+                var kasus = <?php echo $f?>;
+                var aktif = <?php echo $n?>;
+                var meninggal = <?php echo $m?>;
+                var sembuh = <?php echo $b?>;
+                window.onload = function() {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        title: {
+                                text: "Total Data Global"
+                        },
+                        data: [{
+                                type: "pie",
+                                startAngle: 240,
+                                yValueFormatString: "##0.00\"%\"",
+                                indexLabel: "{label} {y}",
+                                dataPoints: [
+                                        {y: aktif, label: "aktif"},
+                                        {y: meninggal, label: "meninggal"},
+                                        {y: sembuh, label: "sembuh"}
+                                ]
+                        }]
+                });
+                chart.render();
+                }
+        </script>
+        <script>
+            window.onload = function () {
+                var chart = new CanvasJS.Chart("barChart", {
+                    animationEnabled: true,
+                    axisX:{
+                        interval: 1
+                    },
+                    axisY2:{
+                        interlacedColor: "rgba(1,77,101,.2)",
+                        gridColor: "rgba(1,77,101,.1)",
+                        title: "Number of Companies"
+                    },
+                    data: [{
+                        type: "bar",
+                        name: "companies",
+                        axisYType: "secondary",
+                        indexLabel: "{nama} {v}",
+                        color: "#014D65",
+                        dataPoints: [
+                            <?php
+                            $pp = 0;
+                                foreach ($data as $no) {
+                                    if ($pp++ > 10) {
+                                        break;
+                                    }
+                                    ?>
+                            { v: <?= $no['kasus']?>, nama: "<?= $no['nama_negara']?>" },
+                            <?php }?>
+                        ]
+                    }]
+                });
+                chart.render();
+                
+                }
+        </script>

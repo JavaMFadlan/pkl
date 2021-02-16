@@ -14,9 +14,7 @@ use App\Http\Controllers\ProvinsiController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','HomeController@index1');
 
 
 Auth::routes();
@@ -25,22 +23,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/charts', 'HomeController@charts')->name('charts');
 Route::get('/tables', 'HomeController@tables')->name('tables');
 
-Route::resource('provinsi', 'ProvinsiController');
-Route::resource('kota', 'KotaController');
-Route::resource('kecamatan', 'KecamatanController');
-Route::resource('kelurahan', 'KelurahanController');
-Route::resource('rw', 'RwController');
-Route::resource('tracking', 'TrackingController');
-
-
-// Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function (){
-//     Route::get('/home', function()
-//     {
-//         return view('index');
-//     });
-//     Route::get('/charts', function()
-//     {
-//         return view('charts');
-//     });
-// });
-
+Route::resource('provinsi', 'ProvinsiController')->middleware('auth');
+Route::resource('kota', 'KotaController')->middleware('auth');
+Route::resource('kecamatan', 'KecamatanController')->middleware('auth');
+Route::resource('kelurahan', 'KelurahanController')->middleware('auth');
+Route::resource('rw', 'RwController')->middleware('auth');
+Route::resource('tracking', 'TrackingController')->middleware('auth');
